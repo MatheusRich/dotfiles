@@ -1,4 +1,4 @@
-er]
+[user]
 	name = Matheus Richard
 	email = matheusrichardt@gmail.com
 [core]
@@ -7,4 +7,5 @@ er]
 [alias]
   checkout-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
   amend = commit --amend
-
+[push]
+	default = simple
