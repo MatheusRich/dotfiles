@@ -99,4 +99,25 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="vim ~/.zshrc"
 alias gl="git log"
 alias gpl"git pull"
+alias gs="git status"
+alias -g G='| grep --color'
+alias cat="bat"
+
+mcd () {
+  mkdir "$1" && cd "$1"
+}
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="/home/matheus/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# added by travis gem
+[ -f /home/matheus/.travis/travis.sh ] && source /home/matheus/.travis/travis.sh
 
