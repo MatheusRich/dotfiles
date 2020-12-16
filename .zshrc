@@ -7,7 +7,7 @@ export ZSH="/home/matheus/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
@@ -68,7 +68,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z)
+plugins=(git z zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,29 +95,48 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias ohmyzsh="vim ~/.oh-my-zsh"
-alias zshconfig="vim ~/.zshrc"
-alias gl="git log"
-alias gpl"git pull"
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias docs="cd /home/matheus/Documents/fretadao"
 alias gs="git status"
+alias gl="git log"
+alias web="cd /home/matheus/Documents/fretadao/apps/web"
+alias rr='adb shell input text "RR"'
+alias clean-branches='git branch --list --format "%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)" | xargs git branch -D'
+alias -s rb=vim #opens ruby files in vim
+alias gpl='git pull'
+alias gplo='git pull origin'
+alias chall="sudo chown matheus:matheus -R *"
+alias rbenv-update='cd ~/.rbenv/plugins/ruby-build/ && git pull'
+alias cat='bat -p'
 alias -g G='| grep --color'
-alias cat="bat"
+alias c='code'
+alias be='bundle exec'
 
-mcd () {
+function mcd () {
   mkdir "$1" && cd "$1"
+}
+
+function inko() {
+  docker run -it -v $(pwd):/src inkolang/inko:0.8.1 ash -c "cd src && inko $1"
+}
+
+function puts() {
+  ruby -e "puts($*)"
+}
+
+function fix-sound() {
+  while sleep 0.1; do pacmd set-source-volume alsa_input.pci-0000_00_1f.3.analog-stereo ${1:-15000}; done
 }
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH="/home/matheus/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# added by travis gem
-[ -f /home/matheus/.travis/travis.sh ] && source /home/matheus/.travis/travis.sh
 
