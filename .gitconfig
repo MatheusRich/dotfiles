@@ -3,9 +3,16 @@
 	email = matheusrichardt@gmail.com
 [core]
 	editor = vim
-
-[alias]
-  checkout-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
-  amend = commit --amend
 [push]
 	default = simple
+[alias]
+  amend = commit --amend
+  checkout-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
+	commits-at-date = "!f() { git log --pretty='format:%C(yellow)%h %G? %ad%Cred%d %Creset%s%C(cyan) [%cn]' --decorate --after=\"$1 0:00\" --before=\"$1 23:59\" --author \"`git config user.name`\"; }; f"
+[delta]
+	plus-style = "syntax #012800"
+	minus-style = "syntax #340001"
+	syntax-theme = Monokai Extended
+	side-by-side = true
+[interactive]
+	diffFilter = delta --color-only
