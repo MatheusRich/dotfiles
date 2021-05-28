@@ -100,6 +100,7 @@ source $ZSH/oh-my-zsh.sh
 alias docs="cd /home/matheus/Documents/fretadao"
 alias gs="git status"
 alias gl="git log"
+alias gtypo="git add . && git commit -m'Typo'"
 alias web="cd /home/matheus/Documents/fretadao/apps/web"
 alias rr='adb shell input text "RR"'
 alias clean-branches='git branch --list --format "%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)" | xargs git branch -D'
@@ -111,11 +112,14 @@ alias rbenv-update='cd ~/.rbenv/plugins/ruby-build/ && git pull'
 alias cat='bat -p'
 alias -g G='| grep --color'
 alias c='code'
+alias c.='code .'
 alias be='bundle exec'
+alias b='bundle'
 
 function mcd () {
   mkdir "$1" && cd "$1"
 }
+
 
 function inko() {
   docker run -it -v $(pwd):/src inkolang/inko:0.8.1 ash -c "cd src && inko $1"
