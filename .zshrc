@@ -97,16 +97,13 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias docs="cd /home/matheus/Documents/fretadao"
 alias gs="git status"
 alias gl="git log"
 alias gtypo="git add . && git commit -m'Typo'"
-alias web="cd /home/matheus/Documents/fretadao/apps/web"
-alias rr='adb shell input text "RR"'
 alias clean-branches='git branch --list --format "%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)" | xargs git branch -D'
-alias -s rb=vim #opens ruby files in vim
+alias -s rb=vim # opens ruby files in vim
 alias gpl='git pull'
-alias gplo='git pull origin'
+alias gpom='git pull origin main'
 alias chall="sudo chown matheus:matheus -R *"
 alias rbenv-update='cd ~/.rbenv/plugins/ruby-build/ && git pull'
 alias cat='bat -p'
@@ -118,11 +115,6 @@ alias b='bundle'
 
 function mcd () {
   mkdir "$1" && cd "$1"
-}
-
-
-function inko() {
-  docker run -it -v $(pwd):/src inkolang/inko:0.8.1 ash -c "cd src && inko $1"
 }
 
 function puts() {
